@@ -1,0 +1,16 @@
+service: lambda-functions
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  addNumbers:
+    handler: addNumbers.handler
+  uploadFile:
+    handler: uploadFile.handler
+    events:
+      - http:
+          path: upload
+          method: post

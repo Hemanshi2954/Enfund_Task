@@ -1,0 +1,38 @@
+<!-- chat/templates/chat/messages.html -->
+<h2>Chat with {{ receiver_id }}</h2>
+<div class="messages">
+    {% for message in messages %}
+        <div class="message">
+            <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/chat/');
+
+    socket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const message = data.message;
+        const sender = data.sender;
+        const receiver = data.receiver;
+
+        let msgDiv = document.createElement('div');
+        msgDiv.innerHTML = `<strong>${sender} to ${receiver}:</strong> ${message}`;
+        document.querySelector('.messages').appendChild(msgDiv);
+    };
+
+    function sendMessage() {
+        const message = document.querySelector('#message').value;
+        socket.send(JSON.stringify({
+            'message': message,
+            'receiver_id': "{{ receiver_id }}"  
+        }));
+    }
+</script>
+
+<input type="text" id="message" placeholder="Type your message">
+<button onclick="sendMessage()">Send</button>
+</div>
+</body>
+</html>
