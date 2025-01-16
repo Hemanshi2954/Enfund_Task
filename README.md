@@ -84,8 +84,8 @@ This project is a full-stack application that integrates responsive frontend dev
 ## 3.  AWS Lambda Functions
 
 ### Features:
--AWS Lambda Function to Add Two Numbers
--AWS Lambda Function to Store Files in S3 Bucket
+- AWS Lambda Function to Add Two Numbers
+- AWS Lambda Function to Store Files in S3 Bucket
 
 ### Instructions:
 #### Running AWS Lambda Functions:
